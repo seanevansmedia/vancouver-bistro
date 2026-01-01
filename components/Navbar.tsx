@@ -1,14 +1,25 @@
-// File: components/Navbar.tsx
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Leaf } from "lucide-react";
 import Link from "next/link"; 
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
+  // PREVENT SCROLLING WHEN MENU IS OPEN
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   const linkStyle = "relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full cursor-pointer";
 
   return (
@@ -26,7 +37,6 @@ export default function Navbar() {
           <Link href="/farm" className={linkStyle}>Our Farm</Link>
           <Link href="/#visit" className={linkStyle}>Visit Us</Link>
           
-          {/* BOOKING BUTTON - LINKED */}
           <Link href="/book">
             <button className="cursor-pointer bg-[#bef264] text-[#365314] px-8 py-3 rounded-full font-bold hover:bg-white hover:scale-105 transition-all focus:ring-2 focus:ring-white focus:outline-none shadow-md">
               Book Table
@@ -45,8 +55,9 @@ export default function Navbar() {
       </nav>
 
       {/* MOBILE MENU OVERLAY */}
+      {/* Changed z-50 to z-[100] to ensure it is above everything else */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#365314] text-[#ecfccb] p-6 flex flex-col animate-in slide-in-from-right duration-300">
+        <div className="fixed inset-0 z-[100] bg-[#365314] text-[#ecfccb] p-6 flex flex-col animate-in slide-in-from-right duration-300 h-screen w-screen overflow-hidden">
           <div className="flex justify-between items-center mb-12">
             <div className="flex items-center gap-3">
               <Leaf className="w-10 h-10 text-[#bef264]" />
@@ -62,7 +73,6 @@ export default function Navbar() {
             <Link href="/#visit" onClick={() => setIsMobileMenuOpen(false)}>Visit Us</Link>
           </nav>
           <div className="mt-auto">
-             {/* MOBILE BOOKING BUTTON - LINKED */}
              <Link href="/book" onClick={() => setIsMobileMenuOpen(false)}>
                <button className="w-full bg-[#bef264] text-[#365314] py-4 rounded-full font-bold text-lg cursor-pointer">
                  Book a Table

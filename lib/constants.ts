@@ -1,5 +1,3 @@
-// File: lib/constants.ts
-
 export const IMG = {
   // --- CORE ---
   hero: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=2500",
@@ -17,6 +15,9 @@ export const IMG = {
   hands: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&q=80&w=1200",
   seafood: "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&q=80&w=1200",
 
-  // --- BOOKING PAGE (Updated to a brighter interior shot) ---
+  // --- BOOKING PAGE ---
   table: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=2500",
+
+  // --- NEW ETHOS IMAGE ---
+  ethos: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?auto=format&fit=crop&q=80&w=1200", // Fresh carrots/soil
 };

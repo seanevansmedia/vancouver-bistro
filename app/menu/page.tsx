@@ -70,6 +70,8 @@ export default function MenuPage() {
   };
 
   return (
+    // CHANGED: bg-[#f7fee7] (Light Green) instead of Dark Green.
+    // This ensures the Footer sits on a light background, matching the Homepage.
     <div className="bg-[#f7fee7] min-h-screen font-sans text-[#365314] selection:bg-[#bef264] selection:text-[#1a2e05]">
       
       <script
@@ -77,23 +79,22 @@ export default function MenuPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* --- HEADER --- */}
-      <div className="p-4 md:p-6 pb-0">
-        <header className="relative h-[60vh] w-full rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl group">
-          {/* 1. Background Image */}
+      {/* --- HEADER (FULL WIDTH) --- */}
+      <div className="w-full pb-0">
+        <header className="relative h-[60vh] w-full overflow-hidden shadow-2xl group">
           <img 
             src={IMG.menuHeader} 
             alt="Chef plating fresh farm food" 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] motion-reduce:transition-none group-hover:scale-105"
           />
-          
-          {/* 2. Green Overlay */}
           <div className="absolute inset-0 bg-[#1a2e05]/60 mix-blend-multiply" />
-
-          {/* 3. NEW: Top Black Gradient Fade (Matches Homepage Hero) */}
-          <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
           
-          {/* 4. Content */}
+          {/* Top Black Fade */}
+          <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
+
+          {/* Bottom Green Fade (Connects to Dark Menu Section) */}
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#365314] to-transparent z-10 pointer-events-none" />
+
           <div className="relative z-20 h-full max-w-7xl mx-auto flex flex-col">
             <Navbar />
             
@@ -107,47 +108,47 @@ export default function MenuPage() {
         </header>
       </div>
 
-      {/* --- MENU CONTENT --- */}
-      <main className="px-4 md:px-6 py-6 md:py-12">
-        <div className="max-w-7xl mx-auto bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 shadow-xl">
+      {/* --- MENU CONTENT (FULL WIDTH DARK BAND) --- */}
+      <section className="w-full bg-[#365314] py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 text-[#ecfccb]">
           <div className="max-w-4xl mx-auto">
             
             {/* Legend */}
-            <div className="flex justify-center gap-6 mb-16 text-sm font-bold text-[#365314]/60 uppercase tracking-widest" aria-hidden="true">
+            <div className="flex justify-center gap-6 mb-16 text-sm font-bold text-[#ecfccb]/60 uppercase tracking-widest" aria-hidden="true">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#bef264]"></span> GF = Gluten Free</span>
-              <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#4d7c0f]"></span> V = Vegetarian</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-white"></span> V = Vegetarian</span>
             </div>
 
             {/* Menu Categories */}
-            <div className="space-y-20">
+            <div className="space-y-24">
               {MENU_ITEMS.map((section, idx) => (
                 <section key={idx} aria-labelledby={`category-${idx}`}>
-                  <div className="flex items-center gap-4 mb-8">
+                  <div className="flex items-center gap-4 mb-10 border-b border-[#ecfccb]/20 pb-4">
                     <Leaf className="w-6 h-6 text-[#bef264]" aria-hidden="true" />
-                    <h2 id={`category-${idx}`} className="text-3xl md:text-4xl font-black text-[#365314]">
+                    <h2 id={`category-${idx}`} className="text-3xl md:text-5xl font-black text-white">
                       {section.category}
                     </h2>
                   </div>
                   
-                  <div className="grid gap-8">
+                  <div className="grid gap-10">
                     {section.items.map((item, itemIdx) => (
-                      <article key={itemIdx} className="group flex flex-col md:flex-row justify-between md:items-end border-b border-[#ecfccb] pb-6 hover:bg-[#f7fee7]/50 transition p-4 rounded-2xl">
+                      <article key={itemIdx} className="group flex flex-col md:flex-row justify-between md:items-start p-4 -mx-4 rounded-2xl hover:bg-[#ecfccb]/5 transition">
                         <div className="md:w-3/4">
-                          <div className="flex items-baseline gap-3 mb-2">
-                            <h3 className="text-xl font-bold">{item.name}</h3>
+                          <div className="flex items-baseline gap-4 mb-2">
+                            <h3 className="text-xl md:text-2xl font-bold text-white">{item.name}</h3>
                             <div className="flex gap-2" aria-label="Dietary tags">
                               {item.tags.map(tag => (
-                                <span key={tag} className="text-[10px] font-black bg-[#ecfccb] text-[#365314] px-2 py-0.5 rounded-full">
+                                <span key={tag} className="text-[10px] font-black bg-[#bef264] text-[#365314] px-2 py-0.5 rounded-full">
                                   {tag}
                                 </span>
                               ))}
                             </div>
                           </div>
-                          <p className="text-[#365314]/70 leading-relaxed font-medium">
+                          <p className="text-[#ecfccb]/80 leading-relaxed font-medium text-lg">
                             {item.desc}
                           </p>
                         </div>
-                        <div className="mt-4 md:mt-0 font-black text-xl text-[#4d7c0f]">
+                        <div className="mt-4 md:mt-0 font-black text-2xl text-[#bef264]">
                           {item.price}
                         </div>
                       </article>
@@ -158,8 +159,8 @@ export default function MenuPage() {
             </div>
 
             {/* Dietary Note */}
-            <div className="mt-20 text-center p-8 bg-[#f7fee7] rounded-3xl">
-              <p className="font-bold opacity-70">
+            <div className="mt-24 text-center p-10 bg-[#1a2e05] rounded-[2rem] border border-[#ecfccb]/10 shadow-inner">
+              <p className="font-bold opacity-80 text-[#ecfccb] text-lg">
                 Please inform your server of any allergies. <br/>
                 An 18% gratuity will be added to parties of 6 or more.
               </p>
@@ -167,8 +168,9 @@ export default function MenuPage() {
 
           </div>
         </div>
-      </main>
+      </section>
 
+      {/* Footer will now sit on the Light Green background, matching Home */}
       <Footer />
     </div>
   );
