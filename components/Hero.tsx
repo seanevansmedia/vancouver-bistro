@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <div className="w-full pb-0">
       
-      <header className="relative h-[85vh] w-full overflow-hidden shadow-2xl group">
+      <header className="relative h-[100dvh] md:h-[85vh] w-full overflow-hidden shadow-2xl group">
         
         {/* Background Image */}
         <img 
