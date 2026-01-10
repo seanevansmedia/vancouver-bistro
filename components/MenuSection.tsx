@@ -28,15 +28,15 @@ export default function MenuSection() {
   ];
 
   return (
-    // CHANGED: pb-6 md:pb-8 -> pb-16 md:pb-24
-    // This matches the padding of the Location Section for perfect symmetry.
-    <section id="menu" className="px-4 md:px-6 pb-16 md:pb-24">
+    // REVERTED STYLE: px-4 md:px-6 (Floating container style)
+    // TIGHTER SPACING: pb-8 md:pb-12 (Reduced from 24 to bring sections closer)
+    <section id="menu" className="px-4 md:px-6 pb-8 md:pb-12">
       <div className="max-w-7xl mx-auto pt-0">
         
         {/* HEADER */}
         <div className="flex flex-col items-center md:flex-row md:justify-between md:items-end mb-12 md:mb-16">
            <div className="text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-black mb-4">Lunch Favorites</h2>
+              <h2 className="text-4xl md:text-5xl font-black mb-4">Lunch Favorites</h2>
               <p className="text-lg opacity-70 font-medium">Served daily from 11am - 3pm.</p>
            </div>
            

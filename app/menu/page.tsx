@@ -70,8 +70,6 @@ export default function MenuPage() {
   };
 
   return (
-    // CHANGED: bg-[#f7fee7] (Light Green) instead of Dark Green.
-    // This ensures the Footer sits on a light background, matching the Homepage.
     <div className="bg-[#f7fee7] min-h-screen font-sans text-[#365314] selection:bg-[#bef264] selection:text-[#1a2e05]">
       
       <script
@@ -79,9 +77,9 @@ export default function MenuPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* --- HEADER (FULL WIDTH) --- */}
+      {/* --- HERO (FULL WIDTH) --- */}
       <div className="w-full pb-0">
-        <header className="relative h-[60vh] w-full overflow-hidden shadow-2xl group">
+        <header className="relative h-[50vh] w-full overflow-hidden shadow-2xl group">
           <img 
             src={IMG.menuHeader} 
             alt="Chef plating fresh farm food" 
@@ -92,24 +90,30 @@ export default function MenuPage() {
           {/* Top Black Fade */}
           <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
 
-          {/* Bottom Green Fade (Connects to Dark Menu Section) */}
+          {/* Bottom Green Fade */}
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#365314] to-transparent z-10 pointer-events-none" />
 
           <div className="relative z-20 h-full max-w-7xl mx-auto flex flex-col">
             <Navbar />
             
-            <div className="flex-1 flex flex-col justify-center items-center text-center p-6 text-white pb-20">
+            {/* 
+               CHANGED: 
+               1. Removed 'pb-20' to fix vertical alignment.
+               2. Changed text size to text-4xl md:text-6xl.
+            */}
+            <div className="flex-1 flex flex-col justify-center items-center text-center p-6 text-white">
               <span className="text-[#bef264] font-bold uppercase tracking-widest text-sm mb-4 drop-shadow-md">Farm to Table</span>
-              <h1 className="text-5xl md:text-7xl font-black leading-none mb-6 drop-shadow-lg">
-                Seasonal Menu.
+              <h1 className="text-4xl md:text-6xl font-black leading-none mb-6 drop-shadow-lg">
+                Seasonal Menu
               </h1>
             </div>
           </div>
         </header>
       </div>
 
-      {/* --- MENU CONTENT (FULL WIDTH DARK BAND) --- */}
-      <section className="w-full bg-[#365314] py-20 md:py-32">
+      {/* --- MENU CONTENT (FULL WIDTH DARK GREEN) --- */}
+      <section className="w-full bg-[#365314] py-12 md:py-24">
+        
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-[#ecfccb]">
           <div className="max-w-4xl mx-auto">
             
@@ -170,8 +174,10 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* Footer will now sit on the Light Green background, matching Home */}
-      <Footer />
+      {/* Footer Wrapper */}
+      <div className="bg-[#f7fee7] text-[#365314]">
+        <Footer />
+      </div>
     </div>
   );
 }
