@@ -34,13 +34,14 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  const linkStyle = "relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full cursor-pointer";
+  // UPDATED STYLE:
+  // Changed 'after:h-[2px]' to 'after:h-[3px]' for a thicker line
+  const linkStyle = "relative transition-colors duration-300 hover:text-[#bef264] after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[3px] after:w-0 after:-translate-x-1/2 after:bg-[#bef264] after:transition-all after:duration-300 after:ease-out hover:after:w-full cursor-pointer";
 
   return (
     <>
       {/* 
           OUTER WRAPPER: Handles Positioning, Background, and Vertical Padding (Shrinking)
-          This spans the full width of the viewport.
       */}
       <div 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out
@@ -52,7 +53,6 @@ export default function Navbar() {
         
         {/* 
             INNER CONTAINER: Handles Width Constraint
-            This ensures the Logo and Links align with the rest of the max-w-7xl content.
         */}
         <nav 
           className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center text-white" 
@@ -64,7 +64,7 @@ export default function Navbar() {
             <Leaf 
               className={`text-[#bef264] transition-all duration-500 ${isScrolled ? "w-6 h-6" : "w-10 h-10"}`} 
             />
-            <span className={`font-bold tracking-tight transition-all duration-500 ${isScrolled ? "text-2xl" : "text-4xl"}`}>
+            <span className={`font-bold tracking-tight transition-all duration-500 group-hover:text-[#bef264] ${isScrolled ? "text-2xl" : "text-4xl"}`}>
               Greenhouse.
             </span>
           </Link>
@@ -106,9 +106,15 @@ export default function Navbar() {
             </button>
           </div>
           <nav className="flex flex-col gap-8 text-3xl font-bold">
-            <Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>Menu</Link>
-            <Link href="/farm" onClick={() => setIsMobileMenuOpen(false)}>Our Farm</Link>
-            <Link href="/#visit" onClick={() => setIsMobileMenuOpen(false)}>Visit Us</Link>
+            <Link href="/menu" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#bef264] transition-colors">
+              Menu
+            </Link>
+            <Link href="/farm" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#bef264] transition-colors">
+              Our Farm
+            </Link>
+            <Link href="/#visit" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#bef264] transition-colors">
+              Visit Us
+            </Link>
           </nav>
           <div className="mt-auto">
              <Link href="/book" onClick={() => setIsMobileMenuOpen(false)}>
