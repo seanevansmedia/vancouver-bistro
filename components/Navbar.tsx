@@ -64,8 +64,8 @@ export default function Navbar() {
             <Leaf 
               className={`text-[#bef264] transition-all duration-500 ${isScrolled ? "w-6 h-6" : "w-10 h-10"}`} 
             />
-            <span className={`font-bold tracking-tight transition-all duration-500 group-hover:text-[#bef264] ${isScrolled ? "text-2xl" : "text-4xl"}`}>
-              Greenhouse.
+            <span className={`font-bold tracking-tight transition-all duration-500 group-hover:text-[#ffffff] ${isScrolled ? "text-2xl" : "text-4xl"}`}>
+              Greenhouse
             </span>
           </Link>
 
