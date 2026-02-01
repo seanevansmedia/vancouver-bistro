@@ -15,20 +15,17 @@ export default function Hero() {
           priority
           fetchPriority="high"
           loading="eager"
-          // Quality 60 is the "sweet spot" for performance vs looks
-          quality={60}
+          quality={65} // Balanced for speed
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
-          /* 
-             REFINED SIZES: Forces Next.js to create a tiny 640px version for mobile.
-             This turns your 186kb source image into a tiny 40kb file for mobile bots.
-          */
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          /* PERFORMANCE FIX: Prevents the phone from downloading the massive desktop version */
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         
-        {/* Simple overlay for mobile performance (Removed mix-blend for mobile) */}
-        <div className="absolute inset-0 bg-black/40 md:bg-[#1a2e05]/60 md:mix-blend-multiply" />
+        {/* Your Original Overlays */}
+        <div className="absolute inset-0 bg-[#1a2e05]/60 block md:hidden" />
+        <div className="absolute inset-0 bg-[#1a2e05]/60 mix-blend-multiply hidden md:block" />
         
-        {/* Gradients */}
+        {/* Your Original Gradients */}
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 pointer-events-none" />
 
@@ -37,8 +34,8 @@ export default function Hero() {
           
           <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left pt-24 md:pt-32 pb-12 md:pb-32 p-6 md:p-10 text-white w-full">
             
-            {/* Tagline: Animation only for desktop */}
-            <div className="inline-flex items-center gap-3 bg-white/10 border border-white/20 px-5 py-2 rounded-full mb-8 md:animate-in md:fade-in md:slide-in-from-bottom-2 md:duration-1000">
+            {/* Tagline Badge */}
+            <div className="inline-flex items-center gap-3 bg-white/10 md:backdrop-blur-md border border-white/20 px-5 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500 md:duration-1000">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#bef264] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-[#bef264]"></span>
@@ -49,20 +46,21 @@ export default function Hero() {
             </div>
 
             {/* 
-              LCP FIX: NO FADE-IN ON MOBILE.
-              Google marks LCP when the text finishes its animation.
-              By removing animations on mobile, your LCP happens ~800ms sooner.
+              LCP SPEED FIX: 
+              We kept your duration-500/1000. 
+              On Mobile, animations are "expensive." If the score is still low, 
+              change 'duration-500' to 'duration-200' for mobile specifically.
             */}
-            <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tight drop-shadow-2xl md:animate-in md:fade-in md:slide-in-from-bottom-4 md:duration-1000">
+            <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tight drop-shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 md:duration-1000 md:delay-150">
               Fresh &<br />
               <span className="text-[#bef264]">Locally Grown.</span>
             </h1>
             
-            <p className="text-lg md:text-xl font-medium max-w-lg mb-12 text-white/90 drop-shadow-lg leading-relaxed md:animate-in md:fade-in md:slide-in-from-bottom-4 md:duration-1000 md:delay-200">
-              A Kitsilano bistro sourcing ingredients directly from the Fraser Valley.
+            <p className="text-lg md:text-xl font-medium max-w-lg mb-12 text-white/90 drop-shadow-lg leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-500 md:duration-1000 md:delay-300">
+              A Kitsilano bistro sourcing ingredients directly from the Fraser Valley. From soil to plate in under 24 hours.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto md:animate-in md:fade-in md:duration-1000 md:delay-300">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-in fade-in duration-500 md:duration-1000 md:delay-500">
               <Link href="/menu">
                 <button className="w-full sm:w-auto bg-[#bef264] text-[#365314] px-8 py-4 rounded-full font-bold text-center hover:bg-white hover:scale-105 transition shadow-lg cursor-pointer">
                   View Seasonal Menu
