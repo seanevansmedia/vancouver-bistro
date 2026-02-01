@@ -9,8 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Greenhouse | Farm to Table Bistro",
-  description: "Sustainable dining in Kitsilano.",
+  title: {
+    template: '%s | Greenhouse',
+    default: 'Greenhouse | Farm to Table Bistro',
+  },
+  description: "Sustainable, organic dining in Kitsilano, Vancouver.",
+  keywords: ["Vancouver Restaurant", "Farm to Table", "Kitsilano"],
 };
 
 export default function RootLayout({
@@ -21,14 +25,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* CRITICAL: Update path to .avif and add type */}
+        {/* 
+          LCP FIX: Preload the image so it starts at 0.0 seconds.
+          TypeScript Fix: fetchPriority must be camelCase.
+        */}
         <link 
           rel="preload" 
           as="image" 
           href="/hero.avif" 
           type="image/avif"
-          fetchpriority="high" 
+          fetchPriority="high" 
         />
+        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={`${inter.className} antialiased`}>
         {children}

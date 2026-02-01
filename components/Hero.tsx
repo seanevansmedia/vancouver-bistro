@@ -14,17 +14,16 @@ export default function Hero() {
           src={IMG.hero} 
           alt="Greenhouse dining interior" 
           fill
-          priority // Highest priority for LCP
-          loading="eager" // Forces immediate download
-          fetchPriority="high" // Priority hint for browser
-          decoding="sync" // Forces immediate render
-          quality={65} // Balanced for 90+ score without losing detail
+          priority 
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
+          quality={65}
           className="object-cover transition-transform duration-[20s] group-hover:scale-105"
-          // Optimized sizes to prevent "oversized image" warnings on mobile
-          sizes="(max-width: 768px) 100vw, 100vw" 
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         
-        {/* Your Exact Overlays */}
+        {/* Overlays */}
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/80 to-transparent z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none" />
