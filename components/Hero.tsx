@@ -15,17 +15,16 @@ export default function Hero() {
           priority
           fetchPriority="high"
           loading="eager"
-          quality={65} // Balanced for speed
+          quality={75}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
-          /* PERFORMANCE FIX: Prevents the phone from downloading the massive desktop version */
+          /* SPEED FIX: Prevents mobile from loading the huge desktop image version */
           sizes="(max-width: 768px) 100vw, 100vw"
         />
         
-        {/* Your Original Overlays */}
+        {/* Your Original Visuals: Overlays & Styling */}
         <div className="absolute inset-0 bg-[#1a2e05]/60 block md:hidden" />
         <div className="absolute inset-0 bg-[#1a2e05]/60 mix-blend-multiply hidden md:block" />
         
-        {/* Your Original Gradients */}
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 pointer-events-none" />
 
@@ -34,7 +33,6 @@ export default function Hero() {
           
           <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left pt-24 md:pt-32 pb-12 md:pb-32 p-6 md:p-10 text-white w-full">
             
-            {/* Tagline Badge */}
             <div className="inline-flex items-center gap-3 bg-white/10 md:backdrop-blur-md border border-white/20 px-5 py-2 rounded-full mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500 md:duration-1000">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#bef264] opacity-75"></span>
@@ -45,12 +43,6 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* 
-              LCP SPEED FIX: 
-              We kept your duration-500/1000. 
-              On Mobile, animations are "expensive." If the score is still low, 
-              change 'duration-500' to 'duration-200' for mobile specifically.
-            */}
             <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tight drop-shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 md:duration-1000 md:delay-150">
               Fresh &<br />
               <span className="text-[#bef264]">Locally Grown.</span>

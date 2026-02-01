@@ -4,7 +4,7 @@ import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap', // Shows system font instantly until Inter is ready
+  display: 'swap',
   variable: '--font-inter',
   weight: ['400', '500', '700', '900'], 
 });
@@ -16,12 +16,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    // Added 'antialiased' here to keep font rendering smooth from the start
     <html lang="en" className={`${inter.variable} scroll-smooth antialiased`}>
+      <head>
+        {/* FIX: Using camelCase imageSrcSet and imageSizes to fix DOM errors */}
+        <link
+          rel="preload"
+          as="image"
+          href="/_next/image?url=%2Fhero.avif&w=640&q=75"
+          imageSrcSet="/_next/image?url=%2Fhero.avif&w=640&q=75 640w, /_next/image?url=%2Fhero.avif&w=750&q=75 750w, /_next/image?url=%2Fhero.avif&w=828&q=75 828w"
+          imageSizes="100vw"
+        />
+      </head>
       <body className={`${inter.className} bg-white text-[#1a2e05]`}>
         {children}
       </body>

@@ -3,11 +3,17 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 31536000, 
-    remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }],
+    // FIX: This whitelists the quality levels you used so the errors stop
+    qualities: [50, 60, 65, 75],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   experimental: {
-    // This removes the "Render Blocking CSS" delay by inlining styles
+    // FIX: This inlines CSS to remove that 170ms "Render Blocking" warning
     optimizeCss: true,
   },
 };
