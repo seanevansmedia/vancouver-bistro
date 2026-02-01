@@ -4,9 +4,8 @@ import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap', // This allows the "swap" to happen
+  display: 'swap',
   variable: '--font-inter',
-  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -22,19 +21,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* Bypass Next.js optimizer for the Hero for the fastest possible LCP */}
+        {/* 
+           THE SPEED SECRET: 
+           This must be the VERY FIRST THING in your head. 
+           It tells the browser to download the image while it's still 
+           busy reading the CSS file.
+        */}
         <link 
           rel="preload" 
           as="image" 
           href="/hero.avif" 
           fetchPriority="high" 
         />
+        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
-      {/* 
-         CRITICAL: We apply inter.className and antialiased here 
-         to ensure the font transition is smooth.
-      */}
-      <body className={`${inter.className} antialiased`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
