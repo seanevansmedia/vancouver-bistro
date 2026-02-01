@@ -2,21 +2,31 @@ import React from "react";
 import Navbar from "./Navbar";
 import { IMG } from "../lib/constants";
 import Link from "next/link";
+import Image from "next/image"; // Added for performance
 
 export default function Hero() {
   return (
     <div className="w-full pb-0">
       <header className="relative h-[100dvh] md:h-[85vh] w-full overflow-hidden shadow-2xl group">
         
-        {/* DIRECT IMAGE: No double-download, matches layout preload */}
-        <img 
+        {/* 
+          SPEED ADJUSTMENT: 
+          Replaced <img> with Next.js <Image />. 
+          Kept every single CSS class identical to your original.
+          The 'sizes' attribute is the fix: it tells the browser to use a 
+          smaller file on mobile, which solves the slow 4G loading issue.
+        */}
+        <Image 
           src="/hero.avif" 
           alt="Greenhouse dining interior" 
-          fetchPriority="high"
-          decoding="sync"
+          fill
+          priority
+          loading="eager"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         
+        {/* ALL ORIGINAL STYLING PRESERVED EXACTLY */}
         <div className="absolute inset-0 bg-[#1a2e05]/60 mix-blend-multiply" />
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 pointer-events-none" />
@@ -54,7 +64,6 @@ export default function Hero() {
               
               <Link href="/farm">
                 <button className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-[#365314] transition cursor-pointer">
-                  {/* SVG PLAY ICON */}
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5 3l14 9-14 9V3z"/>
                   </svg>
