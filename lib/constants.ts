@@ -1,7 +1,6 @@
 export const IMG = {
   // --- CORE ---
-  // Reduced from 2500 to 1400 and q=80 to q=60
-  hero: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=60&w=1400",
+  hero: "/hero.avif", // Updated to .avif
   farm: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=60&w=1000",
   bowl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=60&w=1000",
   toast: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&q=60&w=1000",
@@ -17,7 +16,7 @@ export const IMG = {
   seafood: "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&q=60&w=1000",
 
   // --- BOOKING PAGE ---
-  table: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=60&w=1400",
+  table: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=60&w=2400",
 
   // --- NEW ETHOS IMAGE ---
   ethos: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?auto=format&fit=crop&q=60&w=1000", 

@@ -1,20 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Using Next.js Font optimization
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-// This optimizes the font and prevents it from blocking the render
 const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap', // This is crucial for performance
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s | Greenhouse',
-    default: 'Greenhouse | Farm to Table Bistro',
-  },
-  description: "Sustainable, organic dining in Kitsilano, Vancouver. Experience fresh local ingredients from the Fraser Valley.",
-  keywords: ["Vancouver Restaurant", "Farm to Table", "Kitsilano", "Organic Dining", "Greenhouse Bistro"],
+  title: "Greenhouse | Farm to Table Bistro",
+  description: "Sustainable dining in Kitsilano.",
 };
 
 export default function RootLayout({
@@ -23,14 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* These tell the browser to start connecting to Unsplash immediately */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* CRITICAL: Update path to .avif and add type */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/hero.avif" 
+          type="image/avif"
+          fetchpriority="high" 
+        />
       </head>
-      {/* Added inter.className to the body */}
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
