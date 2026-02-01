@@ -3,7 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    // This tells the browser to cache images for 1 year
     minimumCacheTTL: 31536000, 
     remotePatterns: [
       {
@@ -11,6 +10,10 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
+  },
+  // SPEED FIX: This inlines critical CSS to solve "Render Blocking" issues
+  experimental: {
+    optimizeCss: true,
   },
 };
 
