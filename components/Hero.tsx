@@ -3,24 +3,22 @@ import Navbar from "./Navbar";
 import { IMG } from "../lib/constants";
 import Link from "next/link";
 import { Play } from "lucide-react";
-import Image from "next/image";
 
 export default function Hero() {
   return (
     <div className="w-full pb-0">
       <header className="relative h-[100dvh] md:h-[85vh] w-full overflow-hidden shadow-2xl group">
         
-        <Image 
+        {/* 
+          Direct <img> tag ensures the browser uses the preloaded /hero.avif 
+          immediately without waiting for React or Next.js Image servers.
+        */}
+        <img 
           src={IMG.hero} 
           alt="Greenhouse dining interior" 
-          fill
-          priority 
-          loading="eager"
           fetchPriority="high"
           decoding="sync"
-          quality={65}
-          className="object-cover transition-transform duration-[20s] group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 100vw"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
         />
         
         {/* Overlays */}

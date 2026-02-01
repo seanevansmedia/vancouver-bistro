@@ -1,4 +1,3 @@
-import React from "react";
 import { IMG } from "../lib/constants";
 import { Leaf, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -14,7 +13,7 @@ export default function PhilosophySection() {
               src={IMG.ethos} 
               alt="Fresh carrots with soil" 
               fill
-              loading="lazy" 
+              loading="lazy" // Ensures this doesn't slow down the Hero
               className="object-cover" 
               sizes="(max-width: 1024px) 100vw, 50vw" 
             />
@@ -35,7 +34,7 @@ export default function PhilosophySection() {
             </h2>
 
             <p className="text-lg md:text-xl font-medium text-[#365314]/80 leading-relaxed mb-12 max-w-lg">
-               We skip the warehouses and work directly with local farmers. Our ingredients travel from the Fraser Valley to your plate in under 24 hours, ensuring peak flavor and nutrition in every bite.
+               We skip the warehouses and work directly with local farmers.
             </p>
 
             <Link href="/farm">
