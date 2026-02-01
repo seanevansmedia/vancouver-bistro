@@ -1,24 +1,12 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  /* Use system font stack first. This is instant. */
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  /* This shows system fonts instantly, removing the 190ms wait */
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   text-rendering: optimizeSpeed;
 }
 
-/* 
-  Only apply Inter to headings. 
-  This prevents the browser from having to "calculate" 
-  font weights for the whole body while the page is loading.
-*/
-h1, h2, h3, .font-black {
-  font-family: var(--font-inter), ui-sans-serif, sans-serif;
+/* Only use Inter for the big text once it finishes downloading */
+h1, h2, .font-black {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }

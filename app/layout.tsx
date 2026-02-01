@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Greenhouse | Farm to Table Bistro",
-  description: "Sustainable dining in Kitsilano, Vancouver.",
+  description: "Sustainable, organic dining in Kitsilano, Vancouver.",
 };
 
 export default function RootLayout({
@@ -21,21 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* 
-           THE SPEED SECRET: 
-           This must be the VERY FIRST THING in your head. 
-           It tells the browser to download the image while it's still 
-           busy reading the CSS file.
-        */}
+        {/* Preload the Hero image as early as possible */}
         <link 
           rel="preload" 
           as="image" 
           href="/hero.avif" 
+          type="image/avif"
           fetchPriority="high" 
         />
-        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
-      <body className="antialiased">
+      <body className={`${inter.className} antialiased`}>
         {children}
       </body>
     </html>

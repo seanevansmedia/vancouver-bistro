@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Leaf } from "lucide-react";
 import Link from "next/link"; 
 
 export default function Navbar() {
@@ -34,15 +33,10 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  // UPDATED STYLE:
-  // Changed 'after:h-[2px]' to 'after:h-[3px]' for a thicker line
   const linkStyle = "relative transition-colors duration-300 hover:text-[#bef264] after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[3px] after:w-0 after:-translate-x-1/2 after:bg-[#bef264] after:transition-all after:duration-300 after:ease-out hover:after:w-full cursor-pointer";
 
   return (
     <>
-      {/* 
-          OUTER WRAPPER: Handles Positioning, Background, and Vertical Padding (Shrinking)
-      */}
       <div 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out
         ${isScrolled 
@@ -50,20 +44,22 @@ export default function Navbar() {
           : "bg-transparent py-6"
         }`}
       >
-        
-        {/* 
-            INNER CONTAINER: Handles Width Constraint
-        */}
         <nav 
           className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center text-white" 
           aria-label="Main Navigation"
         >
           
-          {/* LOGO */}
+          {/* LOGO WITH SVG LEAF */}
           <Link href="/" className="flex items-center gap-3 group">
-            <Leaf 
-              className={`text-[#bef264] transition-all duration-500 ${isScrolled ? "w-6 h-6" : "w-10 h-10"}`} 
-            />
+            <svg 
+              className={`text-[#bef264] transition-all duration-500 fill-none stroke-current stroke-2 ${isScrolled ? "w-6 h-6" : "w-10 h-10"}`} 
+              viewBox="0 0 24 24" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/>
+              <path d="M11 20v-5a4 4 0 0 1 4-4h5"/>
+            </svg>
             <span className={`font-bold tracking-tight transition-all duration-500 group-hover:text-[#ffffff] ${isScrolled ? "text-2xl" : "text-4xl"}`}>
               Greenhouse
             </span>
@@ -82,13 +78,20 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE MENU BUTTON WITH SVG HAMBURGER */}
           <button 
             onClick={() => setIsMobileMenuOpen(true)}
             className="md:hidden text-white hover:text-[#bef264] transition p-2"
             aria-label="Open Menu"
           >
-            <Menu className={`transition-all duration-500 ${isScrolled ? "w-8 h-8" : "w-10 h-10"}`} />
+            <svg 
+              className={`transition-all duration-500 fill-none stroke-current stroke-2 ${isScrolled ? "w-8 h-8" : "w-10 h-10"}`} 
+              viewBox="0 0 24 24"
+            >
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
           </button>
         </nav>
       </div>
@@ -98,11 +101,24 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[100] bg-[#365314] text-[#ecfccb] p-6 flex flex-col animate-in slide-in-from-right duration-300 h-screen w-screen overflow-hidden">
           <div className="flex justify-between items-center mb-12">
             <div className="flex items-center gap-3">
-              <Leaf className="w-10 h-10 text-[#bef264]" />
+              <svg 
+                className="w-10 h-10 text-[#bef264] fill-none stroke-current stroke-2" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/>
+                <path d="M11 20v-5a4 4 0 0 1 4-4h5"/>
+              </svg>
               <span className="font-bold text-4xl">Greenhouse.</span>
             </div>
             <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close Menu">
-              <X className="w-10 h-10" />
+              {/* SVG X ICON */}
+              <svg 
+                className="w-10 h-10 fill-none stroke-current stroke-2" 
+                viewBox="0 0 24 24"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
           <nav className="flex flex-col gap-8 text-3xl font-bold">

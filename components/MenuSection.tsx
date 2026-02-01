@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import React from "react";
 import { IMG } from "../lib/constants";
 import Link from "next/link";
-import Image from "next/image"; // Added for optimization
+import Image from "next/image";
 
 export default function MenuSection() {
   const items = [
@@ -29,7 +29,8 @@ export default function MenuSection() {
   ];
 
   return (
-    <section id="menu" className="px-4 md:px-6 pb-8 md:pb-12">
+    /* ADJUSTED PADDING: Changed from pb-24/32 down to pb-16/20 */
+    <section id="menu" className="px-4 md:px-6 pb-16 md:pb-20">
       <div className="max-w-7xl mx-auto pt-0">
         
         {/* HEADER */}
@@ -39,8 +40,12 @@ export default function MenuSection() {
               <p className="text-lg opacity-70 font-medium">Served daily from 11am - 3pm.</p>
            </div>
            
-           <Link href="/menu" className="hidden md:flex items-center gap-2 font-bold hover:gap-4 transition-all text-[#4d7c0f]">
-             View Full Menu <ArrowRight className="w-5 h-5" />
+           {/* LARGE BUTTON SIZE (Desktop) */}
+           <Link href="/menu" className="hidden md:flex items-center gap-2 font-bold hover:gap-4 transition-all text-[#4d7c0f] text-xl">
+             View Full Menu 
+             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
+             </svg>
            </Link>
         </div>
 
@@ -49,11 +54,6 @@ export default function MenuSection() {
            {items.map((item, i) => (
              <div key={i} className="group cursor-pointer">
                 <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden mb-6 relative">
-                   {/* 
-                      OPTIMIZED IMAGE: 
-                      - Next.js will compress these to WebP/AVIF.
-                      - loading="lazy" ensures they don't steal bandwidth from the Hero image.
-                   */}
                    <Image 
                      src={item.img} 
                      alt={item.title} 
@@ -78,7 +78,8 @@ export default function MenuSection() {
                    )}
                 </div>
                 
-                <div className="text-center md:text-left px-4 md:px-0">
+                {/* CENTERED TEXT AREAS */}
+                <div className="text-center px-4">
                   <h3 className="text-2xl font-bold mb-2 group-hover:text-[#4d7c0f] transition">{item.title}</h3>
                   <p className="opacity-70 leading-relaxed font-medium">{item.desc}</p>
                 </div>
@@ -86,11 +87,14 @@ export default function MenuSection() {
            ))}
         </div>
         
-        {/* MOBILE BUTTON */}
+        {/* LARGE BUTTON SIZE (Mobile) */}
         <div className="mt-12 text-center md:hidden relative z-10">
            <Link href="/menu">
-             <button className="bg-[#bef264] text-[#365314] w-full py-5 rounded-full font-black text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer">
-               View Full Menu <ArrowRight className="w-6 h-6" />
+             <button className="bg-[#bef264] text-[#365314] w-full py-6 rounded-full font-black text-2xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer">
+               View Full Menu 
+               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
+               </svg>
              </button>
            </Link>
         </div>

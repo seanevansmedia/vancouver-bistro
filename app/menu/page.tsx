@@ -1,7 +1,7 @@
+import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { IMG } from "../../lib/constants";
-import { Leaf } from "lucide-react";
 import type { Metadata } from 'next';
 
 // --- MENU DATA ---
@@ -77,30 +77,28 @@ export default function MenuPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* --- HERO (FULL WIDTH) --- */}
+      {/* --- HERO SECTION --- */}
       <div className="w-full pb-0">
-        <header className="relative h-[50vh] w-full overflow-hidden shadow-2xl group">
+        <header className="relative h-[50vh] w-full overflow-hidden shadow-2xl group bg-[#1a2e05]">
+          {/* 
+             LCP OPTIMIZATION:
+             Using direct <img> with fetchPriority for the fastest paint possible.
+          */}
           <img 
             src={IMG.menuHeader} 
             alt="Chef plating fresh farm food" 
+            fetchPriority="high"
+            decoding="sync"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] motion-reduce:transition-none group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-[#1a2e05]/60 mix-blend-multiply" />
           
-          {/* Top Black Fade */}
           <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
-
-          {/* Bottom Green Fade */}
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#365314] to-transparent z-10 pointer-events-none" />
 
           <div className="relative z-20 h-full max-w-7xl mx-auto flex flex-col">
             <Navbar />
             
-            {/* 
-               CHANGED: 
-               1. Removed 'pb-20' to fix vertical alignment.
-               2. Changed text size to text-4xl md:text-6xl.
-            */}
             <div className="flex-1 flex flex-col justify-center items-center text-center p-6 text-white">
               <span className="text-[#bef264] font-bold uppercase tracking-widest text-sm mb-4 drop-shadow-md">Farm to Table</span>
               <h1 className="text-4xl md:text-6xl font-black leading-none mb-6 drop-shadow-lg">
@@ -111,7 +109,7 @@ export default function MenuPage() {
         </header>
       </div>
 
-      {/* --- MENU CONTENT (FULL WIDTH DARK GREEN) --- */}
+      {/* --- MENU CONTENT --- */}
       <section className="w-full bg-[#365314] py-12 md:py-24">
         
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-[#ecfccb]">
@@ -128,7 +126,19 @@ export default function MenuPage() {
               {MENU_ITEMS.map((section, idx) => (
                 <section key={idx} aria-labelledby={`category-${idx}`}>
                   <div className="flex items-center gap-4 mb-10 border-b border-[#ecfccb]/20 pb-4">
-                    <Leaf className="w-6 h-6 text-[#bef264]" aria-hidden="true" />
+                    {/* SVG LEAF REPLACE LUCIDE */}
+                    <svg 
+                      className="w-6 h-6 text-[#bef264]" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/>
+                      <path d="M11 20v-5a4 4 0 0 1 4-4h5"/>
+                    </svg>
                     <h2 id={`category-${idx}`} className="text-3xl md:text-5xl font-black text-white">
                       {section.category}
                     </h2>
@@ -174,7 +184,6 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* Footer Wrapper */}
       <div className="bg-[#f7fee7] text-[#365314]">
         <Footer />
       </div>
