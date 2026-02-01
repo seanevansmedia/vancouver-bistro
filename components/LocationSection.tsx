@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 export default function LocationSection() {
+  const [showMap, setShowMap] = useState(false);
+
   return (
-    <section id="visit" className="w-full bg-[#365314] pt-16 pb-24 md:pt-24 md:pb-32">
+    <section id="visit" className="w-full bg-[#365314] pt-16 pb-20 md:pt-24 md:pb-28">
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-[#ecfccb]">
          
          <h2 className="text-4xl md:text-5xl font-black mb-12 md:mb-16 text-white text-center md:text-left">
@@ -13,42 +15,62 @@ export default function LocationSection() {
 
          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
             
-            {/* MAP CONTENT */}
-            <div className="md:order-1 h-80 md:h-[500px] bg-[#eef5e6] rounded-[2rem] overflow-hidden relative border-4 border-[#4d7c0f]/30 shadow-2xl group w-full">
-               <iframe 
-                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.686086772793!2d-123.15982602339396!3d49.26352797152064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673c004f90a9b%3A0x62a3f742200508a6!2s2284%20W%204th%20Ave%2C%20Vancouver%2C%20BC%20V6K%201N8!5e0!3m2!1sen!2sca!4v1709230000000!5m2!1sen!2sca" 
-                 width="100%" 
-                 height="100%" 
-                 style={{ 
-                    border: 0, 
-                    filter: 'grayscale(100%) sepia(30%) hue-rotate(85deg) saturate(160%) contrast(95%)' 
-                 }} 
-                 allowFullScreen={true} 
-                 loading="lazy" 
-                 referrerPolicy="no-referrer-when-downgrade"
-                 title="Greenhouse Bistro Location"
-               ></iframe>
+            {/* MAP CONTENT - SPEED OPTIMIZED FACADE */}
+            <div className="md:order-1 h-80 md:h-[550px] bg-[#eef5e6] rounded-[2.5rem] overflow-hidden relative border-4 border-[#4d7c0f]/30 shadow-2xl group w-full">
+               
+               {!showMap ? (
+                 /* The "Facade" - This looks like a map but is just a div. Zero JS impact. */
+                 <div 
+                   className="absolute inset-0 bg-cover bg-center cursor-pointer flex items-center justify-center group"
+                   style={{ 
+                     backgroundImage: `url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=60&w=1000')`, // Use a static screenshot of your map location here
+                     filter: 'grayscale(100%) brightness(0.7)'
+                   }}
+                   onClick={() => setShowMap(true)}
+                 >
+                    <div className="absolute inset-0 bg-[#365314]/40 group-hover:bg-[#365314]/20 transition-all duration-300"></div>
+                    <button className="relative z-10 bg-white text-[#365314] px-8 py-4 rounded-full font-black text-lg shadow-2xl transform group-hover:scale-110 transition-transform">
+                      View Interactive Map
+                    </button>
+                 </div>
+               ) : (
+                 /* The Actual Map - Only loads on click */
+                 <iframe 
+                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.686086772793!2d-123.15982602339396!3d49.26352797152064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673c004f90a9b%3A0x62a3f742200508a6!2s2284%20W%204th%20Ave%2C%20Vancouver%2C%20BC%20V6K%201N8!5e0!3m2!1sen!2sca!4v1709230000000!5m2!1sen!2sca" 
+                   width="100%" 
+                   height="100%" 
+                   style={{ 
+                      border: 0, 
+                      filter: 'grayscale(100%) sepia(30%) hue-rotate(85deg) saturate(160%) contrast(95%)' 
+                   }} 
+                   allowFullScreen={true} 
+                   loading="lazy" 
+                   referrerPolicy="no-referrer-when-downgrade"
+                   title="Greenhouse Bistro Location"
+                 ></iframe>
+               )}
 
                 <div className="absolute bottom-6 right-6 pointer-events-none">
                   <span className="bg-white text-[#365314] px-6 py-2 rounded-full font-bold shadow-lg text-sm border border-[#365314]/10">
-                    Interactive Map
+                    Kitsilano, BC
                   </span>
                </div>
             </div>
 
-            {/* TEXT CONTENT */}
-            <div className="md:order-2 flex flex-col justify-center h-full py-4">
+            {/* TEXT CONTENT - CENTERED ON MOBILE */}
+            <div className="md:order-2 flex flex-col justify-center h-full py-4 text-center md:text-left">
                <div className="space-y-12">
-                  <div className="flex gap-6">
-                     <div className="w-12 h-12 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white">
-                        {/* SVG MAP PIN */}
-                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  
+                  {/* Address */}
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                     <div className="w-14 h-14 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
                         </svg>
                      </div>
                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2">Kitsilano</h3>
-                        <p className="text-lg opacity-80 leading-relaxed">
+                        <h3 className="text-2xl font-black text-white mb-2">Location</h3>
+                        <p className="text-xl opacity-80 leading-relaxed font-medium">
                            2284 West 4th Avenue<br/>
                            Vancouver, BC V6K 1N8
                         </p>
@@ -56,41 +78,41 @@ export default function LocationSection() {
                           href="https://maps.google.com/?q=2284+West+4th+Avenue,+Vancouver,+BC" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="inline-block mt-4 underline decoration-[#bef264] underline-offset-4 hover:text-white text-[#bef264] font-bold"
+                          className="inline-block mt-4 text-xl underline decoration-[#bef264] underline-offset-8 hover:text-white text-[#bef264] font-black transition-colors"
                         >
                           Get Directions
                         </a>
                      </div>
                   </div>
 
-                  <div className="flex gap-6">
-                     <div className="w-12 h-12 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white">
-                        {/* SVG CLOCK */}
-                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Hours */}
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                     <div className="w-14 h-14 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                      </div>
-                     <div>
-                        <h3 className="text-xl font-bold text-white mb-2">Hours</h3>
-                        <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-lg opacity-80">
-                           <span>Mon - Thu</span> <span>11am - 10pm</span>
-                           <span>Fri - Sat</span> <span>11am - 11pm</span>
-                           <span>Sunday</span> <span>10am - 9pm</span>
+                     <div className="w-full max-w-xs md:max-w-none">
+                        <h3 className="text-2xl font-black text-white mb-2">Hours</h3>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-xl opacity-80 font-medium">
+                           <span className="text-left md:text-left">Mon - Thu</span> <span className="text-right md:text-left">11am - 10pm</span>
+                           <span className="text-left md:text-left">Fri - Sat</span> <span className="text-right md:text-left">11am - 11pm</span>
+                           <span className="text-left md:text-left">Sunday</span> <span className="text-right md:text-left">10am - 9pm</span>
                         </div>
                      </div>
                   </div>
 
-                  <div className="flex gap-6">
-                     <div className="w-12 h-12 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white">
-                        {/* SVG PHONE */}
-                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Contact */}
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                     <div className="w-14 h-14 rounded-full bg-[#4d7c0f] flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
                      </div>
                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2">Contact</h3>
-                        <p className="text-lg opacity-80 mb-2">(604) 555-0199</p>
-                        <p className="text-lg opacity-80">hello@greenhousebistro.ca</p>
+                        <h3 className="text-2xl font-black text-white mb-2">Contact</h3>
+                        <p className="text-xl opacity-80 mb-1 font-medium">(604) 555-0199</p>
+                        <p className="text-xl opacity-80 font-medium">hello@greenhousebistro.ca</p>
                      </div>
                   </div>
                </div>
