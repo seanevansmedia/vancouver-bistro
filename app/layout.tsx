@@ -4,10 +4,8 @@ import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap',
+  display: 'swap', // Shows system font instantly until Inter is ready
   variable: '--font-inter',
-  // SPEED FIX: Explicitly loading these weights prevents "Layout Shift" 
-  // and browser CPU strain on mobile devices.
   weight: ['400', '500', '700', '900'], 
 });
 
@@ -22,22 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
-      <head>
-        {/* 1. SPEED FIX: Preconnect tells the phone to start connecting 
-            to Google's font servers immediately, saving ~150ms. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* 
-          NOTE: Manual preload for /hero.avif has been removed. 
-          The <Image priority /> in your Hero component now handles this 
-          by preloading a responsive, mobile-optimized version. 
-        */}
-      </head>
-      {/* 2. STYLE FIX: Added a default text color to prevent 
-          "Flash of Unstyled Content" on slow mobile connections. */}
-      <body className={`${inter.className} antialiased bg-white text-[#1a2e05]`}>
+    // Added 'antialiased' here to keep font rendering smooth from the start
+    <html lang="en" className={`${inter.variable} scroll-smooth antialiased`}>
+      <body className={`${inter.className} bg-white text-[#1a2e05]`}>
         {children}
       </body>
     </html>

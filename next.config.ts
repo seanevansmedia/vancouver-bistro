@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // SPEED FIX: This inlines critical CSS to solve "Render Blocking" issues
+  // EXPERIMENTAL: This inlines the CSS needed for the Hero directly into the HTML
+  // It removes the 190ms "Render Blocking" delay you are seeing in PageSpeed.
   experimental: {
     optimizeCss: true,
   },
