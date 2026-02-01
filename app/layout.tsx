@@ -4,8 +4,9 @@ import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap', // Shows Arial instantly while Inter downloads
-  variable: '--font-inter', // Matches the CSS variable in globals.css
+  display: 'swap', // This allows the "swap" to happen
+  variable: '--font-inter',
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* Bypass Next.js optimizer for the Hero to save ~1.5 seconds */}
+        {/* Bypass Next.js optimizer for the Hero for the fastest possible LCP */}
         <link 
           rel="preload" 
           as="image" 
@@ -29,7 +30,11 @@ export default function RootLayout({
           fetchPriority="high" 
         />
       </head>
-      <body className="antialiased">
+      {/* 
+         CRITICAL: We apply inter.className and antialiased here 
+         to ensure the font transition is smooth.
+      */}
+      <body className={`${inter.className} antialiased`}>
         {children}
       </body>
     </html>

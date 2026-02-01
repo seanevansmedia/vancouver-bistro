@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { IMG } from "../lib/constants";
 import Link from "next/link";
+import Image from "next/image"; // Added for optimization
 
 export default function MenuSection() {
   const items = [
@@ -28,8 +29,6 @@ export default function MenuSection() {
   ];
 
   return (
-    // REVERTED STYLE: px-4 md:px-6 (Floating container style)
-    // TIGHTER SPACING: pb-8 md:pb-12 (Reduced from 24 to bring sections closer)
     <section id="menu" className="px-4 md:px-6 pb-8 md:pb-12">
       <div className="max-w-7xl mx-auto pt-0">
         
@@ -50,16 +49,28 @@ export default function MenuSection() {
            {items.map((item, i) => (
              <div key={i} className="group cursor-pointer">
                 <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden mb-6 relative">
-                   <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                   {/* 
+                      OPTIMIZED IMAGE: 
+                      - Next.js will compress these to WebP/AVIF.
+                      - loading="lazy" ensures they don't steal bandwidth from the Hero image.
+                   */}
+                   <Image 
+                     src={item.img} 
+                     alt={item.title} 
+                     fill
+                     loading="lazy"
+                     className="object-cover group-hover:scale-105 transition duration-500" 
+                     sizes="(max-width: 768px) 100vw, 33vw"
+                   />
                    
-                   <div className={`absolute top-4 right-4 px-4 py-1 rounded-full font-bold text-sm shadow-sm ${item.isHappyHour ? "bg-[#bef264] text-[#365314]" : "bg-white text-[#365314]"}`}>
+                   <div className={`absolute top-4 right-4 px-4 py-1 rounded-full font-bold text-sm shadow-sm z-10 ${item.isHappyHour ? "bg-[#bef264] text-[#365314]" : "bg-white text-[#365314]"}`}>
                      {item.price}
                    </div>
                    
                    {item.isHappyHour && (
                      <>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e05]/80 to-transparent" />
-                      <div className="absolute bottom-6 left-6 text-white text-left">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e05]/80 to-transparent z-0" />
+                      <div className="absolute bottom-6 left-6 text-white text-left z-10">
                          <h3 className="text-2xl font-bold">Happy Hour</h3>
                          <p className="font-medium opacity-90">$8 Wines & Bites</p>
                       </div>
