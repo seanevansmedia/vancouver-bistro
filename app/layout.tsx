@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth antialiased`}>
       <head>
-        {/* FIX: Using camelCase imageSrcSet and imageSizes to fix DOM errors */}
+        {/* FIX: Using camelCase to satisfy React DOM warnings and fixing LCP Discovery */}
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fhero.avif&w=640&q=75"
+          href="/_next/image?url=%2Fhero.avif&w=750&q=75"
           imageSrcSet="/_next/image?url=%2Fhero.avif&w=640&q=75 640w, /_next/image?url=%2Fhero.avif&w=750&q=75 750w, /_next/image?url=%2Fhero.avif&w=828&q=75 828w"
           imageSizes="100vw"
         />

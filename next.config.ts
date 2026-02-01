@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    // FIX: This whitelists the quality levels you used so the errors stop
+    // FIX: Whitelists all the qualities used in your images to stop the console errors
     qualities: [50, 60, 65, 75],
     remotePatterns: [
       {
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    // FIX: This inlines CSS to remove that 170ms "Render Blocking" warning
+    // FIX: This removes the 170ms "Render Blocking" delay by inlining styles
     optimizeCss: true,
   },
 };
